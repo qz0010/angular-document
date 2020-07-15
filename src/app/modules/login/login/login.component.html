@@ -1,0 +1,18 @@
+<div class="login">
+  <form class="form" #form="ngForm" (ngSubmit)="onSubmit()">
+    <div class="form__row">
+      <div class="form__i-row">
+        <input type="text" name="login" [(ngModel)]="md.login" required placeholder="login" class="form__input">
+      </div>
+    </div>
+    <div class="form__row">
+      <div class="form__i-row">
+        <input type="password" name="password" [(ngModel)]="md.password" required placeholder="password" class="form__input">
+      </div>
+    </div>
+    <div class="form__row">
+      <button type="submit" class="form__btn" [disabled]="form.invalid">Войти</button>
+    </div>
+  </form>
+</div>
+

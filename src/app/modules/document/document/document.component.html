@@ -1,0 +1,46 @@
+<article class="doc" *ngIf="doc$ | async">
+  <div class="doc__head">
+    <h4 class="doc__title">{{(doc$ | async).title}}</h4>
+  </div>
+  <ng-template [ngIf]="approved$ | async" [ngIfElse]="docApproveRef">
+    <div class="doc__body">
+      <p class="doc__message">
+        {{(approved$ | async).message}}
+      </p>
+    </div>
+  </ng-template>
+  <ng-template #docApproveRef>
+    <div class="doc__body">
+      <div class="doc__body-html" [innerHTML]="(doc$ | async).text"></div>
+    </div>
+    <div class="doc__footer">
+      <form class="doc__footer-form">
+        <div class="doc__footer-row">
+          <div class="doc__buttons">
+            <button type="button" class="doc__buttons-btn" (click)="approve(1)">
+              Утвердить
+            </button>
+            <button type="button" class="doc__buttons-btn" (click)="approve(0)">
+              Отклонить
+            </button>
+          </div>
+        </div>
+        <div class="doc__footer-row">
+          <div class="doc__checks">
+            <div class="doc__checks-item">
+              <input type="radio" [(ngModel)]="md.resolution" name="resolution" value="approved"> Согласен
+            </div>
+            <div class="doc__checks-item">
+              <input type="radio" [(ngModel)]="md.resolution" name="resolution" value="reject"> Не согласен
+            </div>
+            <div class="doc__checks-item">
+              <input type="radio" [(ngModel)]="md.resolution" name="resolution" value="blue"> Разрешаю красить в синий цвет
+            </div>
+          </div>
+        </div>
+        <div class="doc__footer-row">
+        </div>
+      </form>
+    </div>
+  </ng-template>
+</article>
